@@ -46,7 +46,10 @@ module Jasmine
 
         # Patching for "guard-jasmine-headless-webkit" gem:
         # it passing options[:report] with report file name, and it's not parsed
-        add_reporter('File', opts[:report]) if opts[:report]
+        if opts[:report]
+          add_reporter('File', opts[:report])
+          add_reporter('Console')
+        end
       end
 
       def process_option(*args)
