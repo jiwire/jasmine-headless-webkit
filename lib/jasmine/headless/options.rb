@@ -42,6 +42,10 @@ module Jasmine
         read_defaults_files
 
         opts.each { |k, v| @options[k] = v if v }
+
+        # Patching for "guard-jasmine-headless-webkit" gem:
+        # it passing options[:report] with report file name, and it's not parsed
+        add_reporter('File', opts[:report]) if opts[:report]
       end
 
       def process_option(*args)
