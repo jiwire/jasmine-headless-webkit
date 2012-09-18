@@ -41,7 +41,8 @@ module Jasmine
         @options[:seed] = rand(10000)
         read_defaults_files
 
-        opts.each { |k, v| @options[k] = v if v }
+        # Filter only nil values - false still should be available
+        @options.merge!(opts.reject { |k, v| v.nil? })
 
         # Patching for "guard-jasmine-headless-webkit" gem:
         # it passing options[:report] with report file name, and it's not parsed
